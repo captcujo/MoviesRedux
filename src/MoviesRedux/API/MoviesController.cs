@@ -28,6 +28,15 @@ namespace MoviesRedux.API
             return movs;
         }
 
+        [HttpGet("{id}")]
+        public Movie Get(int id)
+        {
+            Movie mov = (from m in _db.Movies
+                         where m.Id == id
+                         select m).FirstOrDefault();
+            return mov;
+        }
+
         [HttpPost]
         public IActionResult Post([FromBody]Movie movie)
         {
