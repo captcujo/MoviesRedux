@@ -14,7 +14,8 @@ using System.IO;
 using MoviesRedux.Data;
 using MoviesRedux.Models;
 using MoviesRedux.Services;
-
+using MoviesRedux.Interfaces;
+using MoviesRedux.Respository;
 
 namespace MoviesRedux
 {
@@ -55,6 +56,9 @@ namespace MoviesRedux
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            // Generic Respository:
+            services.AddScoped<IGenericRespository, GenericRespository>();
             
 
             
