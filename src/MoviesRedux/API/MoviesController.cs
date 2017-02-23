@@ -27,5 +27,35 @@ namespace MoviesRedux.API
                                 select m).ToList();
             return movs;
         }
+
+        [HttpPost]
+        public IActionResult Post([FromBody]Movie movie)
+        {
+            if (movie == null)
+            {
+                return BadRequest();
+            } else if (movie.Id == 0)
+            {
+                _db.Add(movie);
+                _db.SaveChanges();
+                return Ok();
+            } else
+            {
+                _db.Update(movie);
+                _db.SaveChanges();
+                return Ok();
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            Movie mov = (from m in _db.Movies
+                         where m.Id == id
+                         select m).FirstOrDefault();
+            _db.Remove(mov);
+            _db.SaveChanges();
+            return Ok();
+        }
     }
 }

@@ -23,15 +23,29 @@ namespace MoviesRedux.Controllers {
                 this.$state.reload();
             });
         }
+    }
+
+    export class EditMovieController
+    {
+        public movie;
+
+        constructor(private $http: ng.IHttpService, private $state: ng.ui.IStateService, private $stateParams: ng.ui.IStateParamsService)
+        {
+            let id = this.$stateParams['id'];
+
+            this.$http.get('/api/movies/' + id).then((response) =>
+            {
+                this.movie = response.data;
+            });
+        }
 
         public addMovie()
         {
             this.$http.post('/api/movies', this.movie).then((response) =>
             {
-                this.$state.reload();
+                this.$state.go('home');
             });
         }
-
     }
 
 
