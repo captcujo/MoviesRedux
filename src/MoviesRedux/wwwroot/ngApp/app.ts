@@ -43,6 +43,18 @@ namespace MoviesRedux {
                 controller: MoviesRedux.Controllers.AboutController,
                 controllerAs: 'controller'
             })
+            .state('addMovie', {
+                url: '/addMovie',
+                templateUrl: '/ngApp/views/addMovie.html',
+                controller: MoviesRedux.Controllers.AddMovieController,
+                controllerAs: 'controller'
+            })
+            .state('editMovie', {
+                url: '/editMovie/:id',
+                templateUrl: '/ngApp/views/editMovie.html',
+                controller: MoviesRedux.Controllers.EditMovieController,
+                controllerAs: 'controller'
+            })
             .state('notFound', {
                 url: '/notFound',
                 templateUrl: '/ngApp/views/notFound.html'
