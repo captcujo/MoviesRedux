@@ -1,7 +1,37 @@
 namespace MoviesRedux.Controllers {
 
-    export class HomeController {
+    export class HomeController
+    {
         public message = 'Hello from the home page!';
+
+        public movies;
+
+        public movie;
+
+        constructor(private $http: ng.IHttpService, private $state: ng.ui.IStateService)
+        {
+            this.$http.get('/api/movies/').then((response) =>
+            {
+                this.movies = response.data;
+            });
+        }
+
+        public deleteMovie(id: number)
+        {
+            this.$http.delete('/api/movies/' + id).then((response) =>
+            {
+                this.$state.reload();
+            });
+        }
+
+        public addMovie()
+        {
+            this.$http.post('/api/movies', this.movie).then((response) =>
+            {
+                this.$state.reload();
+            });
+        }
+
     }
 
 
