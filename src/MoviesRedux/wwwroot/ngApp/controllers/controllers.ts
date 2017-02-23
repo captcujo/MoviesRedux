@@ -48,6 +48,19 @@ namespace MoviesRedux.Controllers {
         }
     }
 
+    export class AddMovieController {
+        public movie;
+
+        constructor(private $http: ng.IHttpService, private $state: ng.ui.IStateService) {
+        }
+
+        public addMovie() {
+            this.$http.post('/api/movies', this.movie).then((response) => {
+                this.$state.go('home');
+            });
+        }
+    }
+
 
     export class SecretController {
         public secrets;
