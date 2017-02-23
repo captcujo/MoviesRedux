@@ -38,11 +38,24 @@ namespace MoviesRedux.API
             {
                 _db.Add(movie);
                 _db.SaveChanges();
+                return Ok();
             } else
             {
                 _db.Update(movie);
                 _db.SaveChanges();
+                return Ok();
             }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            Movie mov = (from m in _db.Movies
+                         where m.Id == id
+                         select m).FirstOrDefault();
+            _db.Remove(mov);
+            _db.SaveChanges();
+            return Ok();
         }
     }
 }
